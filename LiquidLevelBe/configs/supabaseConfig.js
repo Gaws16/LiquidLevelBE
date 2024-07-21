@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+const { createClient } = require("@supabase/supabase-js");
 //Взимаме си dotenv за да можем да използваме променливи от .env файла
 require("dotenv").config();
 //Взимаме си ключа за връзка с базата данни от .env файла
