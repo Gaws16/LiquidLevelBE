@@ -1,7 +1,8 @@
 const router = require("express").Router();
-
-router.get("/all", (req, res) => {
-  res.send("Hello from sensors controller");
+const sensorsService = require("../services/sensorsService");
+router.get("/all", async (req, res) => {
+  const sensors = await sensorsService.getAllSensors();
+  res.json(sensors);
 });
 
 module.exports = router;
