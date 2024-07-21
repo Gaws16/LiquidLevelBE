@@ -1,15 +1,26 @@
+//Четем променливите от .env файла
+require("dotenv").config();
+//Използваме express
 const express = require("express");
+//Използваме конфигурацията на express
+const expressConfig = require("./configs/expressConfig");
+//Изплзваме конфигурацията на експоузнатите ендпойнти
+const routes = require("./routes");
+//Взимаме порта от .env файла
+const PORT = process.env.PORT || 3000;
+
+//Създаваме express приложение
 const app = express();
-const bodyParser = require("body-parser");
+//Използваме конфигурацията на express
+expressConfig(app);
 
-app.use(bodyParser.json());
+//Използваме конфигурацията на експоузнатите ендпойнти
+app.use(routes);
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+//Пускаме сървъра на определения порт
+app.listen(PORT, () => {
+  console.log(`Server is running on PORT ${PORT}`);
 });
 app.get("/", (req, res) => {
-  res.send("Hello World");
-});
-app.get("/liquid-level", (req, res) => {
-  res.send("Liquid Level");
+  res.send("Hello from LiquidLevelBe");
 });
