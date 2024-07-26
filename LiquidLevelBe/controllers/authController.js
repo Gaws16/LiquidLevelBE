@@ -20,6 +20,7 @@ router.post("/login", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+//TODO: Тук трябва да добавим някаква валидация за входните данни имейл и парола, дали е имейл паролата дали съдържа главни букви символи и др.
 //URL: http://localhost:5000/auth/register
 router.post("/register", async (req, res) => {
   //Тук взимаме имейла и паролата от тялото на заявката
