@@ -7,7 +7,7 @@ const expressConfig = require("./configs/expressConfig");
 //Изплзваме конфигурацията на експоузнатите ендпойнти
 const routes = require("./routes");
 //Взимаме порта от .env файла
-const PORT = process.env.PORT || process.env.API_URL || 3000;
+const PORT = process.env.PORT || 3000;
 
 //Създаваме express приложение
 const app = express();
