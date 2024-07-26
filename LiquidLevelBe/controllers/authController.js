@@ -20,4 +20,23 @@ router.post("/login", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+//URL: http://localhost:5000/auth/register
+router.post("/register", async (req, res) => {
+  //Тук взимаме имейла и паролата от тялото на заявката
+  const { email, password } = req.body;
+  if (!email || !password) {
+    res.status(400).json({ message: "Email and password are required!" });
+    return;
+  }
+  try {
+    //Тук извикваме функцията за регистрация от auth сервиза
+    const user = await authService.registerAsync(email, password);
+    //Тук връщаме подготвения респонс като отговор на заявката
+    res.status(201).json(user);
+  } catch (err) {
+    //Ако има грешка, я хващаме и я връщаме като отговор на заявката
+    res.status(400).json({ message: err.message });
+  }
+});
+
 module.exports = router;
