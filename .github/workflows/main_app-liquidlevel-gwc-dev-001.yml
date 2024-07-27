@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'app-liquidlevel-gwc-dev-001'
           slot-name: 'Production'
-          package: ./LiquidLevelBE
+          package: ./LiquidLevelBe
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0E0F72DDC7964F2DA7B0781E1ADEDDD0 }}
