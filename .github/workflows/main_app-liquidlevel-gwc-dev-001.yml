@@ -26,12 +26,13 @@ jobs:
           npm run test --if-present
 
       - name: Add web.config file
+        working-directory: ./LiquidLevelBe
         run: |
           echo '<?xml version="1.0" encoding="utf-8"?>
           <configuration>
             <system.webServer>
               <handlers>
-                <add name="iisnode" path="server.js" verb="*" modules="iisnode" />
+                <add name="iisnode" path="app.js" verb="*" modules="iisnode" />
               </handlers>
               <rewrite>
                 <rules>
@@ -52,7 +53,7 @@ jobs:
               </security>
               <httpErrors existingResponse="PassThrough" />
             </system.webServer>
-          </configuration>' > ./LiquidLevelBe/web.config
+          </configuration>' > web.config
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
