@@ -1,5 +1,3 @@
-//Четем променливите от .env файла
-// require("dotenv").config();
 //Използваме express
 const express = require("express");
 //Използваме конфигурацията на express
