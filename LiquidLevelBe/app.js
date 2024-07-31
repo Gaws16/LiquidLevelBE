@@ -1,13 +1,11 @@
 //Четем променливите от .env файла
-require("dotenv").config();
+// require("dotenv").config();
 //Използваме express
 const express = require("express");
 //Използваме конфигурацията на express
 const expressConfig = require("./configs/expressConfig");
 //Изплзваме конфигурацията на експоузнатите ендпойнти
 const routes = require("./routes");
-//Взимаме порта от .env файла
-const PORT = process.env.PORT || process.env.API_URL || 3000;
 
 //Създаваме express приложение
 const app = express();
@@ -17,10 +15,6 @@ expressConfig(app);
 //Използваме конфигурацията на експоузнатите ендпойнти
 app.use(routes);
 
-//Пускаме сървъра на определения порт
-app.listen(PORT, () => {
-  console.log(`Server is running on PORT ${PORT}`);
-});
-app.get("/", (req, res) => {
-  res.send("Hello from LiquidLevelBe");
-});
+// Изнасям пускането на сървъра в server.js файл като от там ще четат вички ENV-та за целия аpp и няма да се налга да ги инпортираме във всички други файлове, също така променям скриптовете да стартират server.js
+
+module.exports = app;
