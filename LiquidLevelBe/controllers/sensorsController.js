@@ -1,7 +1,6 @@
-const router = require("express").Router();
 const sensorsService = require("../services/sensorsService");
 //URL: http://localhost:5000/sensors
-router.get("/", async (req, res) => {
+exports.getInformation = async (req, res) => {
   try {
     //Тук извикваме функцията от сензорите, която връща всички сензори
     const sensors = await sensorsService.getAllSensors();
@@ -11,6 +10,4 @@ router.get("/", async (req, res) => {
     //Ако има грешка, я хващаме и я връщаме като отговор на заявката, тук е по правилно дасе върне къстъм грешка не директно върнатата от базата данни
     res.status(400).json({ message: err.message });
   }
-});
-
-module.exports = router;
+};

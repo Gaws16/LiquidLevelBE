@@ -1,8 +1,7 @@
-const router = require("express").Router();
 const authService = require("../services/authService");
 
 //URL: http://localhost:5000/auth/login
-router.post("/login", async (req, res) => {
+exports.login = async (req, res, next) => {
   //Тук взимаме имейла и паролата от тялото на заявката
   const { email, password } = req.body;
   //Ако някое от двете липсва, връщame грешка
@@ -19,10 +18,11 @@ router.post("/login", async (req, res) => {
     //Ако има грешка, я хващаме и я връщаме като отговор на заявката
     res.status(400).json({ message: err.message });
   }
-});
+  next();
+};
 //TODO: Тук трябва да добавим някаква валидация за входните данни имейл и парола, дали е имейл паролата дали съдържа главни букви символи и др.
 //URL: http://localhost:5000/auth/register
-router.post("/register", async (req, res) => {
+exports.register = async (req, res, next) => {
   //Тук взимаме имейла и паролата от тялото на заявката
   const { email, password } = req.body;
   if (!email || !password) {
@@ -38,6 +38,5 @@ router.post("/register", async (req, res) => {
     //Ако има грешка, я хващаме и я връщаме като отговор на заявката
     res.status(400).json({ message: err.message });
   }
-});
-
-module.exports = router;
+  next();
+};

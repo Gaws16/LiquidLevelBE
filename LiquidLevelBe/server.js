@@ -5,6 +5,8 @@ dotenv.config({ path: "./config.env" });
 // Вземаме апп-а от app.js
 const app = require("./app");
 
+
+
 //Взимаме порта от .env файла
 const PORT = process.env.PORT || process.env.API_URL || 3000;
 
