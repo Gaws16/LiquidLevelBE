@@ -1,0 +1,5 @@
+{
+  "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
+  "appService.defaultWebAppToDeploy": "/subscriptions/d14117d6-44e4-438a-b8e1-a873523aac83/resourceGroups/rg-liquidlevel-gwc-dev-001/providers/Microsoft.Web/sites/app-liquidlevel-gwc-dev-001",
+  "appService.deploySubpath": "."
+}
