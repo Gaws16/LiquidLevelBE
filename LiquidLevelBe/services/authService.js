@@ -37,7 +37,7 @@ const loginAsync = async (email, password) => {
   };
 
   // dobawqne na аццесс_токен kъм таблицата User_tokens
-  await addPushToken(user.id, user.access_token);
+  // await addPushToken(user.id, user.access_token);
 
   return user;
 };
