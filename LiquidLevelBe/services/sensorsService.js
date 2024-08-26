@@ -13,5 +13,19 @@ const getAllSensors = async () => {
   //Връщаме данните от базата данни
   return data;
 };
+//Тук си правим функция, която ще връща всички сензори от базата данни за даден потребител
+const getAllSensorsForUserAsync = async (userId) => {
+  //
+  const { data, error } = await supabase
+    .from("UsersSensors")
+    .select(`Sensors(*)`) //Тук взимаме всички id-та на сензори и джойнваме с таблицата Sensors от която взимаме цялата информация
+    .eq("userId", userId);
+
+  if (error) {
+    throw error;
+  }
+  //Връщаме само данните от сензорите, понеже заявката на Supabase ги връща по кофти начин
+  return data.map((data) => data.Sensors); //Връщаме масив с всички сензори асоциирани към потребителя
+};
 //Тук изнасяме функцията, за да можем да я ползваме в други файлове
-module.exports = { getAllSensors };
+module.exports = { getAllSensors, getAllSensorsForUserAsync };

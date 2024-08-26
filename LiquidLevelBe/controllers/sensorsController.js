@@ -11,3 +11,16 @@ exports.getInformation = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+exports.getSensorByUserId = async (req, res) => {
+  try {
+    //Тук взимаме id-то на потребитекя от URL-а
+    const userId = req.params.id;
+    //Тук извикваме функцията, която връща всички сензори за даден потребител
+    const sensors = await sensorsService.getAllSensorsForUserAsync(userId);
+    //Тук връщаме всички сензори за дадения потребител
+    res.status(200).json(sensors);
+  } catch (err) {
+    //Ако има грешка, я хващаме и я връщаме като отговор на заявката
+    res.status(400).json({ message: err.message });
+  }
+};
