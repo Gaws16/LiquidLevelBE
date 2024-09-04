@@ -35,7 +35,7 @@ const getUserIdBySensorAddres = async (macAddress) => {
     .eq("mac_address", macAddress)
     .single();
   if (error) {
-    throw new Error(error.message);
+    throw new Error(error.details || error.message);
   }
   const userId = data?.UsersSensors?.userId;
   if (!userId) {

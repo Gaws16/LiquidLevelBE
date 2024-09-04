@@ -15,6 +15,7 @@ const savePushToken = async (userId, pushToken) => {
   return response;
 };
 const sendPushNotification = async (userId) => {
+  // Търсим конкретния пуш токен на юзъра
   const { data: tokens, error } = await supabase
     .from("UsersExpoTokens")
     .select("pushToken")
@@ -25,6 +26,7 @@ const sendPushNotification = async (userId) => {
   if (tokens.length === 0) {
     throw new Error("No push token found for this user!");
   }
+  // Подготвяме съобщението
   const pushToken = tokens[0].pushToken;
   const message = {
     to: pushToken,
@@ -40,6 +42,7 @@ const sendPushNotification = async (userId) => {
   //   console.log(ticketChunk);
   //   tickets.push(...ticketChunk);
   // }
+  //Изпращаме съобщението
   const tickets = await expo.sendPushNotificationsAsync([message]);
   return tickets;
 };

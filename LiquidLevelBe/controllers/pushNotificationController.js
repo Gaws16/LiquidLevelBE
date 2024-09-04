@@ -17,15 +17,20 @@ exports.saveToken = async (req, res, next) => {
 };
 
 exports.sendNotification = async (req, res, next) => {
+  // взимаме macAddress от тялото на заявката
   const { macAddress } = req.body;
-
-  const userId = await sensorsService.getUserIdBySensorAddres(macAddress);
-
-  if (!userId) {
-    res.status(400).json({ message: "User ID is required!" });
-    return;
-  }
   try {
+    // взимаме userId по macAddress
+    const userId = await sensorsService.getUserIdBySensorAddres(macAddress);
+
+    if (!userId) {
+      res.status(400).json({
+        message:
+          "No user associated for this sensor! Please add new row in UsersSensors!",
+      });
+      return;
+    }
+    // изпращаме push notification
     const tickets = await pushNotificationService.sendPushNotification(userId);
     res
       .status(201)
@@ -36,7 +41,7 @@ exports.sendNotification = async (req, res, next) => {
   }
   next();
 };
-
+//Това беше по скоро с експериментална цел, но за момента няма да го махаме
 exports.getUserId = async (req, res, next) => {
   const { macAddress } = req.body;
   if (!macAddress) {
