@@ -27,5 +27,25 @@ const getAllSensorsForUserAsync = async (userId) => {
   //Връщаме само данните от сензорите, понеже заявката на Supabase ги връща по кофти начин
   return data.map((data) => data.Sensors); //Връщаме масив с всички сензори асоциирани към потребителя
 };
+//Тук си правим функция, която ще връща id на user-a асоциаран с даден сензор
+const getUserIdBySensorAddres = async (macAddress) => {
+  const { data, error } = await supabase
+    .from("Sensors")
+    .select("UsersSensors(userId)")
+    .eq("mac_address", macAddress)
+    .single();
+  if (error) {
+    throw new Error(error.details || error.message);
+  }
+  const userId = data?.UsersSensors?.userId;
+  if (!userId) {
+    throw new Error("User not found!");
+  }
+  return userId;
+};
 //Тук изнасяме функцията, за да можем да я ползваме в други файлове
-module.exports = { getAllSensors, getAllSensorsForUserAsync };
+module.exports = {
+  getAllSensors,
+  getAllSensorsForUserAsync,
+  getUserIdBySensorAddres,
+};
