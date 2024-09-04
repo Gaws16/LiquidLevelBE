@@ -7,4 +7,5 @@ router.route("/save-token").post(pushNotificationController.saveToken);
 router
   .route("/send-notification")
   .post(pushNotificationController.sendNotification);
+router.route("/get-user-id").get(pushNotificationController.getUserId);
 module.exports = router;

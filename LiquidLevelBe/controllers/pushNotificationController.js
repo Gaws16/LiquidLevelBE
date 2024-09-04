@@ -1,4 +1,5 @@
 const pushNotificationService = require("../services/pushNotificationService");
+const sensorsService = require("../services/sensorsService");
 exports.saveToken = async (req, res, next) => {
   const { userId, pushToken } = req.body;
   if (!userId || !pushToken) {
@@ -16,7 +17,10 @@ exports.saveToken = async (req, res, next) => {
 };
 
 exports.sendNotification = async (req, res, next) => {
-  const { userId } = req.body;
+  const { macAddress } = req.body;
+
+  const userId = await sensorsService.getUserIdBySensorAddres(macAddress);
+
   if (!userId) {
     res.status(400).json({ message: "User ID is required!" });
     return;
@@ -26,6 +30,22 @@ exports.sendNotification = async (req, res, next) => {
     res
       .status(201)
       .json({ message: "Notification sent successfully!", tickets: tickets });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: err.message });
+  }
+  next();
+};
+
+exports.getUserId = async (req, res, next) => {
+  const { macAddress } = req.body;
+  if (!macAddress) {
+    res.status(400).json({ message: "Mac address is required!" });
+    return;
+  }
+  try {
+    const userId = await sensorsService.getUserIdBySensorAddres(macAddress);
+    res.status(200).json({ userId: userId });
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: err.message });

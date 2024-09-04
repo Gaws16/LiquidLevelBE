@@ -43,4 +43,5 @@ const sendPushNotification = async (userId) => {
   const tickets = await expo.sendPushNotificationsAsync([message]);
   return tickets;
 };
+
 module.exports = { savePushToken, sendPushNotification };
